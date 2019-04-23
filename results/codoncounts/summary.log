@@ -1,0 +1,60 @@
+2019-04-23 11:42:10,928 - INFO - Beginning execution of dms2_batch_bcsubamp in directory /fh/fast/bloom_j/computational_notebooks/lgentles/2019/2B06_DMS
+
+2019-04-23 11:42:10,928 - INFO - Progress is being logged to ./results/codoncounts/summary.log
+2019-04-23 11:42:11,038 - INFO - Version information:
+	Time and date: Tue Apr 23 11:42:10 2019
+	Platform: Linux-3.13.0-165-generic-x86_64-with-debian-jessie-sid
+	Python version: 3.6.7 | packaged by conda-forge | (default, Nov 21 2018, 02:32:25)  [GCC 4.8.2 20140120 (Red Hat 4.8.2-15)]
+	dms_tools2 version: 2.4.10
+	Bio version: 1.72
+	HTSeq version: 0.11.0
+	pandas version: 0.24.2
+	numpy version: 1.15.4
+	IPython version: 7.2.0
+	jupyter version: 1.0.0
+	matplotlib version: 3.0.2
+	plotnine version: 0.5.1
+	natsort version: 5.5.0
+	pystan version: 2.16.0.0
+	scipy version: 1.1.0
+	seaborn version: 0.9.0
+	phydmslib version: 2.3.1
+	statsmodels version: 0.9.0
+	rpy2 version: 2.9.1
+	regex version: 2.4.153
+	umi_tools version: 1.0.0
+
+2019-04-23 11:42:11,039 - INFO - Parsed the following arguments:
+	outdir = ./results/codoncounts
+	ncpus = 14
+	use_existing = yes
+	refseq = ./data/WSN-HA.fasta
+	alignspecs = ['1,285,36,37', '286,570,31,32', '571,855,37,32', '856,1140,31,36', '1141,1425,29,33', '1426,1698,40,43']
+	bclen = 8
+	fastqdir = /fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/
+	R2 = None
+	R1trim = [200]
+	R2trim = [170]
+	bclen2 = None
+	chartype = codon
+	maxmuts = 4
+	minq = 15
+	minreads = 2
+	minfraccall = 0.95
+	minconcur = 0.75
+	sitemask = None
+	purgeread = 0
+	purgebc = 0
+	bcinfo = False
+	batchfile = ./results/codoncounts/batch.csv
+	summaryprefix = summary
+
+2019-04-23 11:42:11,039 - INFO - Parsing sample info from ./results/codoncounts/batch.csv
+2019-04-23 11:42:11,051 - INFO - Read the following sample information:
+name,R1
+WSN-HA-plasmid,WSN-HA-plasmid_*_R1_*.fastq.gz
+2B06-50ug,2B06-50ug_*_R1_*.fastq.gz
+Lib1-mock-rep2,Lib1-mock-rep2_*_R1_*.fastq.gz
+
+
+2019-04-23 11:42:11,081 - INFO - Output files already exist and '--use_existing' is 'yes', so exiting with no further action.

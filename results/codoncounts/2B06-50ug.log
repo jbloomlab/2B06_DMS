@@ -1,0 +1,130 @@
+2019-04-23 11:13:06,606 - INFO - Beginning execution of dms2_bcsubamp in directory /fh/fast/bloom_j/computational_notebooks/lgentles/2019/2B06_DMS
+
+2019-04-23 11:13:06,607 - INFO - Progress is being logged to ./results/codoncounts/2B06-50ug.log
+2019-04-23 11:13:06,615 - INFO - Version information:
+	Time and date: Tue Apr 23 11:13:06 2019
+	Platform: Linux-3.13.0-143-generic-x86_64-with-debian-jessie-sid
+	Python version: 3.6.7 | packaged by conda-forge | (default, Nov 21 2018, 02:32:25)  [GCC 4.8.2 20140120 (Red Hat 4.8.2-15)]
+	dms_tools2 version: 2.4.10
+	Bio version: 1.72
+	HTSeq version: 0.11.0
+	pandas version: 0.24.2
+	numpy version: 1.15.4
+	IPython version: 7.2.0
+	jupyter version: 1.0.0
+	matplotlib version: 3.0.2
+	plotnine version: 0.5.1
+	natsort version: 5.5.0
+	pystan version: 2.16.0.0
+	scipy version: 1.1.0
+	seaborn version: 0.9.0
+	phydmslib version: 2.3.1
+	statsmodels version: 0.9.0
+	rpy2 version: 2.9.1
+	regex version: 2.4.153
+	umi_tools version: 1.0.0
+
+2019-04-23 11:13:06,615 - INFO - Parsed the following arguments:
+	outdir = ./results/codoncounts
+	ncpus = -1
+	use_existing = yes
+	refseq = ./data/WSN-HA.fasta
+	alignspecs = ['1,285,36,37', '286,570,31,32', '571,855,37,32', '856,1140,31,36', '1141,1425,29,33', '1426,1698,40,43']
+	bclen = 8
+	fastqdir = /fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/
+	R2 = None
+	R1trim = [200]
+	R2trim = [170]
+	bclen2 = None
+	chartype = codon
+	maxmuts = 4
+	minq = 15
+	minreads = 2
+	minfraccall = 0.95
+	minconcur = 0.75
+	sitemask = None
+	purgeread = 0
+	purgebc = 0
+	bcinfo = False
+	name = 2B06-50ug
+	R1 = ['2B06-50ug_*_R1_*.fastq.gz']
+
+2019-04-23 11:13:06,672 - INFO - Read refseq of 1698 codons from ./data/WSN-HA.fasta
+2019-04-23 11:13:06,685 - INFO - Reads are in these FASTQ pairs:
+	/fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/2B06-50ug_S1_L001_R1_001.fastq.gz and /fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/2B06-50ug_S1_L001_R2_001.fastq.gz
+
+2019-04-23 11:13:06,685 - INFO - Now parsing read pairs...
+2019-04-23 11:13:22,348 - INFO - Reads parsed so far: 500000
+2019-04-23 11:13:37,230 - INFO - Reads parsed so far: 1000000
+2019-04-23 11:13:52,058 - INFO - Reads parsed so far: 1500000
+2019-04-23 11:14:06,584 - INFO - Reads parsed so far: 2000000
+2019-04-23 11:14:21,589 - INFO - Reads parsed so far: 2500000
+2019-04-23 11:14:36,046 - INFO - Reads parsed so far: 3000000
+2019-04-23 11:14:51,292 - INFO - Reads parsed so far: 3500000
+2019-04-23 11:15:05,741 - INFO - Reads parsed so far: 4000000
+2019-04-23 11:15:19,451 - INFO - Reads parsed so far: 4500000
+2019-04-23 11:15:33,113 - INFO - Reads parsed so far: 5000000
+2019-04-23 11:15:49,095 - INFO - Reads parsed so far: 5500000
+2019-04-23 11:16:02,791 - INFO - Reads parsed so far: 6000000
+2019-04-23 11:16:16,548 - INFO - Reads parsed so far: 6500000
+2019-04-23 11:16:30,438 - INFO - Reads parsed so far: 7000000
+2019-04-23 11:16:44,121 - INFO - Reads parsed so far: 7500000
+2019-04-23 11:16:58,773 - INFO - Reads parsed so far: 8000000
+2019-04-23 11:17:07,094 - INFO - Parsed 8308236 reads, found 1399973 unique barcodes.
+2019-04-23 11:17:07,101 - INFO - Summary stats on reads:
+   total  fail filter  low Q barcode
+ 8308236            0         855769
+2019-04-23 11:17:07,101 - INFO - Writing these stats to ./results/codoncounts/2B06-50ug_readstats.csv
+
+2019-04-23 11:17:07,664 - INFO - Number of reads per barcode:
+                 number of barcodes
+number of reads                    
+1                            297248
+2                            110959
+3                            118006
+4                            128431
+5                            130674
+6                            125370
+7                            112998
+8                             96812
+9                             79409
+10                            61790
+11                            45899
+12                            32845
+13                            22371
+14                            14724
+15                             9366
+16                             5642
+17                             3311
+18                             1910
+19                             1024
+20                              541
+21                              316
+22                              171
+23                               62
+24                               41
+25                               24
+26                               16
+27                                5
+28                                2
+29                                2
+30                                1
+33                                2
+44                                1
+2019-04-23 11:17:07,664 - INFO - Writing these stats to ./results/codoncounts/2B06-50ug_readsperbc.csv
+
+2019-04-23 11:17:07,671 - INFO - Examining the 1399973 barcodes to build and align subamplicons...
+2019-04-23 11:17:21,714 - INFO - Barcodes examined so far: 200000
+2019-04-23 11:17:34,441 - INFO - Barcodes examined so far: 400000
+2019-04-23 11:17:46,633 - INFO - Barcodes examined so far: 600000
+2019-04-23 11:17:58,175 - INFO - Barcodes examined so far: 800000
+2019-04-23 11:18:09,092 - INFO - Barcodes examined so far: 1000000
+2019-04-23 11:18:17,818 - INFO - Barcodes examined so far: 1200000
+2019-04-23 11:18:21,212 - INFO - Examined all barcodes. Summary stats:
+   total  too few reads  not alignable  aligned
+ 1399973         297248         128021   974704
+2019-04-23 11:18:21,214 - INFO - Writing these stats to ./results/codoncounts/2B06-50ug_bcstats.csv
+
+2019-04-23 11:18:21,256 - INFO - Writing the counts of each codon identity at each site to ./results/codoncounts/2B06-50ug_codoncounts.csv
+
+2019-04-23 11:18:21,315 - INFO - Successful completion of dms2_bcsubamp

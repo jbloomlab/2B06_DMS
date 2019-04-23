@@ -1,0 +1,4 @@
+name,R1
+WSN-HA-plasmid,WSN-HA-plasmid_*_R1_*.fastq.gz
+2B06-50ug,2B06-50ug_*_R1_*.fastq.gz
+Lib1-mock-rep2,Lib1-mock-rep2_*_R1_*.fastq.gz
