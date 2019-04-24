@@ -9,11 +9,11 @@ Antibody 2B06 was provided by Patrick Wilson, and first characterized by [Dunand
 Selection of virus libraries with 2B06 was performed by Lauren Gentles as was subsequent analysis.
 
 ## Results
-The easiest way to look at the results is to view the Markdown rendering the Jupyter notebook at [results/analysis_notebook.md](results_analysis_notebook.md).
+The easiest way to look at the results is to view the Markdown rendering the Jupyter notebook at [results/analysis_notebook.md](results/analysis_notebook.md).
 
 ## Running the analysis
 The analysis is contained in the Python Jupyter notebook [analysis_notebook.ipynb](analysis_notebook.ipynb).
-To run the notebook and generate the Markdown summary at [results/analysis_notebook.md](results_analysis_notebook.md), use the bash script [run_notebook.bash](run_notebook.bash) by running:
+To run the notebook and generate the Markdown summary at [results/analysis_notebook.md](results/analysis_notebook.md), use the bash script [run_notebook.bash](run_notebook.bash) by running:
 
     ./run_notebook.bash
 
