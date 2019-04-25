@@ -1,4 +1,4 @@
-selection, library, percent infectivity, R1 path
-2B06, Lib. 1, 0.17, /fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/2B06-50ug_S1_L001_R1_001.fastq.gz
-Mock, Lib. 1, , /fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/Lib1-mock-rep2_S3_L001_R1_001.fastq.gz
-WSN-plasmid, , , /fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/WSN-HA-plasmid_S2_L001_R1_001.fastq.gz
+selection,library,percent_infectivity,R1
+2B06,Lib.1,0.17,/fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/2B06-50ug_S1_L001_R1_001.fastq.gz
+Mock,Lib.1, ,/fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/Lib1-mock-rep2_S3_L001_R1_001.fastq.gz
+WSN-plasmid, , ,/fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/WSN-HA-plasmid_S2_L001_R1_001.fastq.gz

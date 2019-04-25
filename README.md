@@ -23,3 +23,5 @@ To submit and run this on the Hutch cluster, you do:
 
 # Input data
 Input data are in the [./data/](data) subdirectory.
+
+Input files include the [WSN reference sequence](./data/WSN-HA.fasta) and [samplelist.csv](./data/samplelist.csv) which provides the R1 location as well as relavent information about each sample.
