@@ -1,0 +1,8 @@
+- 20Feb19:
+    excelfile: 2B06_neut_analysis.xlsx
+    sheet_mapping:
+      2B06_WSN_wt:
+        serum: 2B06
+        virus: A/WSN/1933
+        dilution_factor: 5
+        initial_concentration: 200
