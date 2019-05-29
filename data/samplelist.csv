@@ -2,3 +2,8 @@ selection,library,percent_infectivity,R1
 2B06,Lib.1,0.17,/fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/2B06-50ug_S1_L001_R1_001.fastq.gz
 Mock,Lib.1, ,/fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/Lib1-mock-rep2_S3_L001_R1_001.fastq.gz
 WSN-plasmid, , ,/fh/fast/bloom_j/SR/ngs/illumina/lgentles/190419_M03100_0418_000000000-CCW7R/Data/Intensities/BaseCalls/WSN-HA-plasmid_S2_L001_R1_001.fastq.gz
+2B06,Lib.2,0.10,/fh/fast/bloom_j/SR/ngs/illumina/bloom_lab/190524_M04866_0253_000000000-CGDFR/Data/Intensities/BaseCalls/2B06-50ug_S1_L001_R1_001.fastq.gz
+Mock,Lib.2, ,/fh/fast/bloom_j/SR/ngs/illumina/bloom_lab/190524_M04866_0253_000000000-CGDFR/Data/Intensities/BaseCalls/WSN-HA-plasmid_S2_L001_R1_001.fastq.gz
+2B06,Lib.3,0.14,/fh/fast/bloom_j/SR/ngs/illumina/bloom_lab/190524_M04866_0253_000000000-CGDFR/Data/Intensities/BaseCalls/Lib1-mock-rep2_S3_L001_R1_001.fastq.gz
+Mock,Lib.3, ,/fh/fast/bloom_j/SR/ngs/illumina/bloom_lab/190524_M04866_0253_000000000-CGDFR/Data/Intensities/BaseCalls/Lib3-mock_S4_L001_R1_001.fastq.gz
+WSN-HA-plasmid, , ,/fh/fast/bloom_j/SR/ngs/illumina/bloom_lab/190524_M04866_0253_000000000-CGDFR/Data/Intensities/BaseCalls/WSN-HA-plasmid_S5_L001_R1_001.fastq.gz
