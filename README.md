@@ -13,19 +13,19 @@ The easiest way to look at the results is to view the Markdown rendering the Jup
 
 ## Running the analysis
 The analysis is contained in the Python Jupyter notebook [analysis_notebook.ipynb](analysis_notebook.ipynb).
-To run the notebook and generate the Markdown summary at [results/analysis_notebook.md](results/analysis_notebook.md), use the bash script [run_notebook.bash](run_notebook.bash) by running:
+To run the notebook and generate the Markdown summary at [results/analysis_notebook.md](results/analysis_notebook.md), use the bash script [run_nbs.bash](run_nbs.bash) by running:
 
-    ./run_notebook.bash
+    ./run_nbs.bash
 
 To submit and run this on the Hutch cluster, you do:
 
-    sbatch -c 4 run_notebook.bash
+    sbatch -c 4 run_nbs.bash
 
 # Input data
 Input data are in the [./data/](data) subdirectory.
 
-[./data/WSN-HA.fasta](./data/WSN-HA.fasta) contains the wildtype sequence of the A/WSN/1933 H1N1 hemagglutinin used in the experimental virus library.
+- [./data/WSN-HA.fasta](./data/WSN-HA.fasta) contains the wildtype sequence of the A/WSN/1933 H1N1 hemagglutinin used in the experimental virus library.
 
-[./data/samplelist.csv](./data/samplelist.csv) provides the R1 location as well as relavent information about each sample.
+- [./data/samplelist.csv](./data/samplelist.csv) provides the R1 location as well as relavent information about each sample.
 
-[./data/H1toH3renumber.csv](./data/H1toH3_renumber.csv) is a CSV file that mapes the numbering from the sequential numbering of the WSN HA protein to the commonly used H3 nubering scheme. The sequential numbering is in the *original* column, and the H3 number is in the *new* column.
+- [./data/H1toH3renumber.csv](./data/H1toH3_renumber.csv) is a CSV file that mapes the numbering from the sequential numbering of the WSN HA protein to the commonly used H3 nubering scheme. The sequential numbering is in the *original* column, and the H3 number is in the *new* column.

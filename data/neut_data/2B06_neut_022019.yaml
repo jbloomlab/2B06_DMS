@@ -1,5 +1,5 @@
 - 20Feb19:
-    excelfile: 2B06_neut_analysis.xlsx
+    excelfile: data/neut_data/2B06_neut_analysis.xlsx
     sheet_mapping:
       2B06_WSN_wt:
         serum: 2B06
