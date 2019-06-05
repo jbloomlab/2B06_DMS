@@ -1,5 +1,7 @@
+
 <h1>Table of Contents<span class="tocSkip"></span></h1>
-<div class="toc"><ul class="toc-item"><li><span><a href="#Mutational-antigenic-profiling-of-2B06-antibody-selection." data-toc-modified-id="Mutational-antigenic-profiling-of-2B06-antibody-selection.-1">Mutational antigenic profiling of 2B06 antibody selection.</a></span><ul class="toc-item"><li><span><a href="#Overview" data-toc-modified-id="Overview-1.1">Overview</a></span></li><li><span><a href="#Import-Python-packages" data-toc-modified-id="Import-Python-packages-1.2">Import Python packages</a></span></li><li><span><a href="#Process-deep-sequencing-data" data-toc-modified-id="Process-deep-sequencing-data-1.3">Process deep sequencing data</a></span><ul class="toc-item"><li><span><a href="#Get-information-about-samples" data-toc-modified-id="Get-information-about-samples-1.3.1">Get information about samples</a></span></li><li><span><a href="#Run-dms2_batch_bcsubamp" data-toc-modified-id="Run-dms2_batch_bcsubamp-1.3.2">Run <code>dms2_batch_bcsubamp</code></a></span></li><li><span><a href="#Look-at-summary-plots" data-toc-modified-id="Look-at-summary-plots-1.3.3">Look at summary plots</a></span></li></ul></li><li><span><a href="#Renumber-codon-counts-to-H3-numbering" data-toc-modified-id="Renumber-codon-counts-to-H3-numbering-1.4">Renumber codon counts to H3 numbering</a></span></li><li><span><a href="#Compute-differential-selection" data-toc-modified-id="Compute-differential-selection-1.5">Compute differential selection</a></span></li><li><span><a href="#Logo-plots-of-differential-selection" data-toc-modified-id="Logo-plots-of-differential-selection-1.6">Logo plots of differential selection</a></span></li></ul></li></ul></div>
+<div class="toc"><ul class="toc-item"><li><span><a href="#Mutational-antigenic-profiling-of-2B06-antibody-selection." data-toc-modified-id="Mutational-antigenic-profiling-of-2B06-antibody-selection.-1">Mutational antigenic profiling of 2B06 antibody selection.</a></span><ul class="toc-item"><li><span><a href="#Overview" data-toc-modified-id="Overview-1.1">Overview</a></span></li><li><span><a href="#Import-Python-packages" data-toc-modified-id="Import-Python-packages-1.2">Import Python packages</a></span></li><li><span><a href="#Process-deep-sequencing-data" data-toc-modified-id="Process-deep-sequencing-data-1.3">Process deep sequencing data</a></span><ul class="toc-item"><li><span><a href="#Get-information-about-samples" data-toc-modified-id="Get-information-about-samples-1.3.1">Get information about samples</a></span></li><li><span><a href="#Run-dms2_batch_bcsubamp" data-toc-modified-id="Run-dms2_batch_bcsubamp-1.3.2">Run <code>dms2_batch_bcsubamp</code></a></span></li><li><span><a href="#Look-at-summary-plots" data-toc-modified-id="Look-at-summary-plots-1.3.3">Look at summary plots</a></span></li></ul></li><li><span><a href="#Renumber-codon-counts-to-H3-numbering" data-toc-modified-id="Renumber-codon-counts-to-H3-numbering-1.4">Renumber codon counts to H3 numbering</a></span></li><li><span><a href="#Compute-differential-selection" data-toc-modified-id="Compute-differential-selection-1.5">Compute differential selection</a></span></li><li><span><a href="#Logo-plots-of-differential-selection" data-toc-modified-id="Logo-plots-of-differential-selection-1.6">Logo plots of differential selection</a></span></li><li><span><a href="#Zoomed-plots-on-sites-of-strong-escape" data-toc-modified-id="Zoomed-plots-on-sites-of-strong-escape-1.7">Zoomed plots on sites of strong escape</a></span></li><li><span><a href="#Set-up-to-enable-interactive-PDB-plotting" data-toc-modified-id="Set-up-to-enable-interactive-PDB-plotting-1.8">Set up to enable interactive PDB plotting</a></span></li></ul></li></ul></div>
+
 # Mutational antigenic profiling of 2B06 antibody selection.
 
 ## Overview
@@ -10,35 +12,41 @@ This antibody was provided by Patrick Wilson and previously characterized as a b
 
 
 ```python
+import glob
 import os
-import pandas
+
 from IPython.display import display, HTML
+
+import matplotlib.pyplot as plt
+plt.ion()
+
+import pandas
+
+import dmslogo
+print(f"Using dmslogo version {dmslogo.__version__}")
+
 import dms_tools2
 from dms_tools2.ipython_utils import showPDF
-import glob
-
-print("Using dms_tools2 version {0}".format(dms_tools2.__version__))
+print(f"Using dms_tools2 version {dms_tools2.__version__}")
 
 # results will go in this directory
 resultsdir = './results/' 
-if not os.path.isdir(resultsdir):
-    os.mkdir(resultsdir)
+os.makedirs(resultsdir, exist_ok=True)
     
 # CPUs to use, should not exceed the number you request with slurm
 ncpus = 14
 
 # do we use existing results or generate everything new?
-use_existing = 'no'
+use_existing = 'yes'
 
 fastqdir = os.path.join(resultsdir, 'FASTQ_files/')
-if not os.path.isdir(fastqdir):
-    os.mkdir(fastqdir)
+os.makedirs(fastqdir, exist_ok=True)
     
 renumberedcountsdir = os.path.join(resultsdir, 'renumberedcounts')
-if not os.path.isdir(renumberedcountsdir):
-    os.mkdir(renumberedcountsdir)
+os.makedirs(renumberedcountsdir, exist_ok=True)
 ```
 
+    Using dmslogo version 0.2.3
     Using dms_tools2 version 2.4.12
 
 
@@ -224,7 +232,7 @@ print("Completed dms2_batch_bcsubamp.")
 
 
 ### Look at summary plots
-The *_readstats.pdf summary plot shows the number of reads that were retained or thrown away due to low quality barcodes. The black regions indicate reads that failed the Illumina filter.
+The `*_readstats.pdf` summary plot shows the number of reads that were retained or thrown away due to low quality barcodes. The black regions indicate reads that failed the Illumina filter.
 
 
 ```python
@@ -236,7 +244,7 @@ showPDF(countsplotprefix + '_readstats.pdf', width=700)
 ![png](analysis_notebook_files/analysis_notebook_8_0.png)
 
 
-The *_readsperbc.pdf summary plot shows the number of times each barcode was read for each sample.
+The `*_readsperbc.pdf` summary plot shows the number of times each barcode was read for each sample.
 
 The distributions for this analysis look good except for the Lib.1 mock sample which could use greater sequencing depth. The Lib.2 and Lib.3 samples could also benefit from increased sequencing depth, but look pretty good for the most part.
 
@@ -249,7 +257,7 @@ showPDF(countsplotprefix + '_readsperbc.pdf')
 ![png](analysis_notebook_files/analysis_notebook_10_0.png)
 
 
-The *_bcstats.pdf summary plot shows the number of barcodes that were able to be aligned to the reference WSN HA sequence. It will also show the number of barcodes that were not able to be alligned either because the barcode was not read enough times or the sequence just could not be aligned to the reference sequence.
+The `*_bcstats.pdf` summary plot shows the number of barcodes that were able to be aligned to the reference WSN HA sequence. It will also show the number of barcodes that were not able to be alligned either because the barcode was not read enough times or the sequence just could not be aligned to the reference sequence.
 
 You can see here that the mock sample that was not sequenced to a great enough depth and has many barcodes thrown out due to too few reads.
 
@@ -262,7 +270,7 @@ showPDF(countsplotprefix + '_bcstats.pdf', width=700)
 ![png](analysis_notebook_files/analysis_notebook_12_0.png)
 
 
-The *_depth.pdf summary plot the depth (e.g. the number of reads for each codon) across the entire HA. This shows how well the barcodes were evenly represented between the different subamplicons.
+The `*_depth.pdf` summary plot the depth (e.g. the number of reads for each codon) across the entire HA. This shows how well the barcodes were evenly represented between the different subamplicons.
 
 The coverage looks good for most of these samples with the Lib.2 and Lib.3 having particularly even coverage.
 
@@ -275,7 +283,7 @@ showPDF(countsplotprefix + '_depth.pdf')
 ![png](analysis_notebook_files/analysis_notebook_14_0.png)
 
 
-The *_mutfreq.pdf summary plot shows the per codon frequency of mutations ar each site. In other words, it is the it is the cummulative number of mutations different from the reference sequence at each site.
+The `*_mutfreq.pdf` summary plot shows the per codon frequency of mutations ar each site. In other words, it is the it is the cummulative number of mutations different from the reference sequence at each site.
 
 We can clearly see increases in mutation frequency here in our selected samples.
 
@@ -288,7 +296,7 @@ showPDF(countsplotprefix + '_mutfreq.pdf')
 ![png](analysis_notebook_files/analysis_notebook_16_0.png)
 
 
-The *_cumulmutcounts.pdf plot below shows the fraction fo mutations that are found less than or equal to the number of times indicated on the x-axis.
+The `*_cumulmutcounts.pdf` plot below shows the fraction fo mutations that are found less than or equal to the number of times indicated on the x-axis.
 
 
 ```python
@@ -299,7 +307,7 @@ showPDF(countsplotprefix + '_cumulmutcounts.pdf')
 ![png](analysis_notebook_files/analysis_notebook_18_0.png)
 
 
-The *_codonmuttypes.pdf summary plot the per-codon frequency of nonsynonymous, synonymous, and stop codon mutation across the entire gene.
+The `*_codonmuttypes.pdf` summary plot the per-codon frequency of nonsynonymous, synonymous, and stop codon mutation across the entire gene.
 
 
 ```python
@@ -310,7 +318,7 @@ showPDF(countsplotprefix + '_codonmuttypes.pdf', width=700)
 ![png](analysis_notebook_files/analysis_notebook_20_0.png)
 
 
-The *_codonmuttypes.csv summary plot shows the nummerical values for the data above.
+The `*_codonmuttypes.csv` summary file shows the nummerical values for the data above.
 
 
 ```python
@@ -381,7 +389,7 @@ display(HTML(codonmuttypes.to_html(index=False)))
 </table>
 
 
-The *_codonntchanges.pdf summary plot shows the frequency of the number of nucleotide mutations that make up a given codon mutation (e.g., ATG to AAG changes 1 nucleotide, ATG to AAC changes 2 nucleotides, and ATG to CAC changes 3 nucleotides).
+The `*_codonntchanges.pdf` summary plot shows the frequency of the number of nucleotide mutations that make up a given codon mutation (e.g., ATG to AAG changes 1 nucleotide, ATG to AAC changes 2 nucleotides, and ATG to CAC changes 3 nucleotides).
 
 
 ```python
@@ -392,10 +400,9 @@ showPDF(countsplotprefix + '_codonntchanges.pdf', width=700)
 ![png](analysis_notebook_files/analysis_notebook_24_0.png)
 
 
+The `*_singlentchanges.pdf` plot below shows the frequency of each type of nucleotide change among only codon mutations with one nucleotide change. This plot is mostly useful to check if there is a large bias in which mutations appear. In particular, if you are getting oxidative damage (which causes G to T mutations) during the library preparation process, you will see a large excess of C to A or G to T mutations (or both). For instance, in the case of influenza, when we get bad oxidative damage, then we see an excess of C to A mutations in the final cDNA since the damage is occurring to a ssRNA genome. If you are sequencing something without polarity, you might see both types of mutations
 
-The *_singlentchanges.pdf plot below shows the frequency of each type of nucleotide change among only codon mutations with one nucleotide change. This plot is mostly useful to check if there is a large bias in which mutations appear. In particular, if you are getting oxidative damage (which causes G to T mutations) during the library preparation process, you will see a large excess of C to A or G to T mutations (or both). For instance, in the case of influenza, when we get bad oxidative damage, then we see an excess of C to A mutations in the final cDNA since the damage is occurring to a ssRNA genome. If you are sequencing something without polarity, you might see both types of mutations
-
-It seems like I am seeing C to A oxidative damage in my lib 1 mock sample. This is not entirely suprising since I used older amplicons to generate this sample.
+It seems like I am seeing mild C to A oxidative damage in my lib 1 mock sample. This is not entirely suprising since I used older amplicons to generate this sample.
 
 
 ```python
@@ -530,6 +537,7 @@ Specifically, there is a file for each individual sample, with a file name that 
     2B06_diffsel.pdf
     2B06.log
     batch.csv
+    line_and_logo_plot.pdf
     summary_2B06-absolutesitediffselcorr.pdf
     summary_2B06-maxmutdiffselcorr.pdf
     summary_2B06-meanmutdiffsel.csv
@@ -547,19 +555,19 @@ Specifically, there is a file for each individual sample, with a file name that 
     summary_medianminmaxdiffsel.pdf
     summary_medianpositivediffsel.pdf
     summary_mediantotaldiffsel.pdf
+    tidy_diffsel.csv
 
 
 Now we are going to look at the correlation of samples within a given group.
 
-Running [dms2_batch_diffsel](https://jbloomlab.github.io/dms_tools2/dms2_batch_diffsel.html) creates correlation plots for the mutation differential selection, positive site differential selection, absolute site differential selection, and maximum mutation differential selection for a site. These files have names like `summary_2B06-Lib.1-mutdiffselcorr.pdf`. Below we show the plots for `mutdiffsel` and `positivesiteddiffsel` (plots are also made for `absolutesitediffsel` and `maxsitediffsel`, but are not shown below as they are less informative for this experiment).
-
+Running [dms2_batch_diffsel](https://jbloomlab.github.io/dms_tools2/dms2_batch_diffsel.html) creates correlation plots for the mutation differential selection, positive site differential selection, absolute site differential selection, and maximum mutation differential selection for a site. These files have names like `summary_2B06-Lib.1-mutdiffselcorr.pdf`. Below we show the plot `positivesiteddiffsel`, which is the main statistic that we are looking at here:
 
 
 ```python
 diffselprefix = os.path.join(diffseldir, 'summary_')
 groups = diffselbatch['group'].unique()
 
-for seltype in ['mutdiffsel', 'positivesitediffsel']:
+for seltype in ['positivesitediffsel']:
     print("\n{0} correlations:".format(seltype))
     plots = []
     for g in groups:
@@ -569,28 +577,20 @@ for seltype in ['mutdiffsel', 'positivesitediffsel']:
 ```
 
     
-    mutdiffsel correlations:
+    positivesitediffsel correlations:
 
 
 
 ![png](analysis_notebook_files/analysis_notebook_36_1.png)
 
 
-    
-    positivesitediffsel correlations:
-
-
-
-![png](analysis_notebook_files/analysis_notebook_36_3.png)
-
-
-Probably the most informative plot is simply the mean positive site differential selection. This plot show the total positive selection for all mutations combined at a give site as shown below.
+Probably the most informative plot is simply the median positive site differential selection. This plot show the total positive selection for all mutations combined at a give site as shown below.
 
 This one of the most informative plots here showing strong possitive differential selection at few sites in the stem region of HA.
 
 
 ```python
-showPDF(diffselprefix + 'meanpositivediffsel.pdf', width=800)
+showPDF(diffselprefix + 'medianpositivediffsel.pdf', width=800)
 ```
 
 
@@ -598,7 +598,7 @@ showPDF(diffselprefix + 'meanpositivediffsel.pdf', width=800)
 
 
 ## Logo plots of differential selection
-The plots above summarize the site or maximum mutation differential selection using line plots. But the most comprehensive way to show this selection is in the form of logo plots that can be created with [dms2_logoplot](https://jbloomlab.github.io/dms_tools2/dms2_logoplot.html).
+The most comprehensive way to show this selection is in the form of logo plots that can be created with [dms2_logoplot](https://jbloomlab.github.io/dms_tools2/dms2_logoplot.html).
 
 We make those logog plots using the median mutation differential selection values returned by [dms2_batch_diffsel](https://jbloomlab.github.io/dms_tools2/dms2_batch_diffsel.html). The reason that we plot the median rather than the mean is that we have noticed that is is often cleaner when there are >2 replicates.
 
@@ -606,25 +606,58 @@ We also add underlays of the wildtype sequence. To add the wildtype sequence, we
 
 Note that this logoplot uses the converted H3 numbering asigned above.
 
+First we get a data frame with all of the medians across groups:
+
 
 ```python
-groups = diffselbatch['group'].unique()
-for group in groups:
-    mutdiffsel = diffselprefix + group + '-medianmutdiffsel.csv'
+median_files = (diffselbatch[['group']]
+                .drop_duplicates()
+                .assign(medianmutfile=lambda x: diffselprefix + x['group'] + '-medianmutdiffsel.csv',
+                        mediansitefile=lambda x: diffselprefix + x['group'] + '-mediansitediffsel.csv')
+                )
 
-    logoplot = os.path.join(diffseldir, '{0}_diffsel.pdf'.format(group))
-    print("\nCreating logo plot for {0} from {1}".format(group, mutdiffsel))
+display(HTML(median_files.to_html(index=False)))
+```
+
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>group</th>
+      <th>medianmutfile</th>
+      <th>mediansitefile</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2B06</td>
+      <td>./results/diffsel/summary_2B06-medianmutdiffse...</td>
+      <td>./results/diffsel/summary_2B06-mediansitediffs...</td>
+    </tr>
+  </tbody>
+</table>
+
+
+Build a logo plot for each group:
+
+
+```python
+for tup in median_files.itertuples(index=False):
+
+    logoplot = os.path.join(diffseldir, '{0}_diffsel.pdf'.format(tup.group))
+    print("\nCreating logo plot for {0} from {1}".format(tup.group, tup.medianmutfile))
     
     log = !dms2_logoplot \
-            --diffsel {mutdiffsel} \
-            --name {group} \
+            --diffsel {tup.medianmutfile} \
+            --name {tup.group} \
             --outdir {diffseldir} \
             --restrictdiffsel positive \
             --sepline no \
             --nperline 113 \
-            --overlay1 {mutdiffsel} wildtype wildtype \
+            --overlay1 {tup.medianmutfile} wildtype wildtype \
             --underlay yes \
-            --use_existing {use_existing}
+            --use_existing {use_existing} \
+            --scalebar 20 "differential selection = 20"
     showPDF(logoplot)
 ```
 
@@ -633,10 +666,432 @@ for group in groups:
 
 
 
-![png](analysis_notebook_files/analysis_notebook_40_1.png)
+![png](analysis_notebook_files/analysis_notebook_42_1.png)
 
 
-This analysis, similarly to the positive differential selection line plot above, shows strong selection at a few sites in the stem region of HA. Sites 377, 380, 383, 384, 387, and 395 (in sequential numbering) show varing degrees of selection with site 384 appearing to have the strongest effect. Interestingly, it appears that many different mutations at this site confer escape indicating most mutations away from the wildtype sequence allow for escape. Further Dunand et al. 2015 identified escape mutations in H7 at sites V318I and I384N, which are located in the HA stalk domain, and G195E, located in the head domain. Considering the differences between H1 and H7 there are striking similarities in the selected sites. We do not identify any head escape mutations in our selection experiments here, but this could be due to strain specific differences.
+This analysis, similarly to the positive differential selection line plot above, shows strong selection at a few sites in the stem region of HA. Several sites in the stem domain show varing degrees of selection with site (HA2)46 appearing to have the strongest effect. Interestingly, it appears that many different mutations at this site confer escape indicating most mutations away from the wildtype sequence allow for escape. Further Dunand et al. 2015 identified escape mutations in H7 at sites V318I and I384N, which are also located in the HA stem domain, and G195E, located in the head domain. Considering the differences between H1 and H7 there are striking similarities in the selected sites. We do not identify any head escape mutations in our selection experiments here, but this could be due to strain specific differences.
+
+## Zoomed plots on sites of strong escape
+First use [dms_tools2.diffsel.df_read_filecols](https://jbloomlab.github.io/dms_tools2/dms_tools2.diffsel.html#dms_tools2.diffsel.df_read_filecols) to read the median differential selection into a tidy data frame.
+First get names of all of the median files:
+
+
+```python
+sel_df = (dms_tools2.diffsel.df_read_filecols(median_files, ['medianmutfile', 'mediansitefile'])
+          .rename(columns={'group': 'antibody'})
+          [['antibody', 'isite', 'site', 'positive_diffsel', 'wildtype', 'mutation', 'mutdiffsel']]
+          )
+```
+
+See how the selection is now in a tidy data frame:
+
+
+```python
+display(HTML(sel_df.head().to_html(index=False)))
+```
+
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>antibody</th>
+      <th>isite</th>
+      <th>site</th>
+      <th>positive_diffsel</th>
+      <th>wildtype</th>
+      <th>mutation</th>
+      <th>mutdiffsel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>R</td>
+      <td>7.837088</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>L</td>
+      <td>5.609973</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>H</td>
+      <td>5.083673</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>Y</td>
+      <td>4.185196</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>K</td>
+      <td>2.143734</td>
+    </tr>
+  </tbody>
+</table>
+
+
+Get sites of "strong" or "significant" escape (**Note**: this next cell currently only works if you have just one antibody):
+
+
+```python
+sel_df, _, _ = dms_tools2.plot.findSigSel(sel_df, 'positive_diffsel', '.temp', fdr=0.5)
+sel_df = sel_df.drop(columns=['P', 'Q'])
+```
+
+Now there is a column "sig" indicating "strong" or "significant" sites of escape:
+
+
+```python
+display(HTML(sel_df.head().to_html(index=False)))
+```
+
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>antibody</th>
+      <th>isite</th>
+      <th>site</th>
+      <th>positive_diffsel</th>
+      <th>wildtype</th>
+      <th>mutation</th>
+      <th>mutdiffsel</th>
+      <th>sig</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>R</td>
+      <td>7.837088</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>L</td>
+      <td>5.609973</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>H</td>
+      <td>5.083673</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>Y</td>
+      <td>4.185196</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>K</td>
+      <td>2.143734</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+
+
+Here are all those "significant" sites:
+
+
+```python
+display(HTML(
+ sel_df
+ .query('sig')
+ [['antibody', 'site', 'positive_diffsel']]
+ .drop_duplicates()
+ .sort_values('site')
+ .reset_index(drop=True)
+ .to_html(index=False)
+ ))
+```
+
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>antibody</th>
+      <th>site</th>
+      <th>positive_diffsel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2B06</td>
+      <td>280</td>
+      <td>9.142997</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>292</td>
+      <td>7.822881</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>(HA2)39</td>
+      <td>11.901355</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>(HA2)42</td>
+      <td>16.633897</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>(HA2)45</td>
+      <td>22.484858</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>(HA2)46</td>
+      <td>58.887742</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>(HA2)47</td>
+      <td>6.663881</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>(HA2)50</td>
+      <td>7.869357</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>(HA2)57</td>
+      <td>15.020422</td>
+    </tr>
+  </tbody>
+</table>
+
+
+Prep for plotting by adding site labels:
+
+
+```python
+sel_df = (
+    sel_df
+    .assign(site_label=lambda x: x['wildtype'] + x['site'].astype('str'))
+    )
+```
+
+Now make and save zoomed logo plot:
+
+
+```python
+line_logo_plot = os.path.join(diffseldir, 'line_and_logo_plot.pdf')
+
+fig, axes = dmslogo.facet_plot(
+        data=sel_df,
+        x_col='isite',
+        show_col='sig',
+        gridrow_col='antibody',
+        share_xlabel=True,
+        share_ylabel=True,
+        share_ylim_across_rows=True,
+        wspace=0.6,
+        draw_line_kwargs=dict(
+                height_col='positive_diffsel',
+                xtick_col='site',
+                ylabel='immune selection',
+                ),
+        draw_logo_kwargs=dict(
+                letter_col='mutation',
+                letter_height_col='mutdiffsel',
+                xtick_col='site_label',
+                xlabel='site',
+                ylabel='immune selection',
+                clip_negative_heights=True,
+                ),
+        )
+display(fig)
+print(f"Saving to {line_logo_plot}")
+fig.savefig(line_logo_plot)
+plt.close(fig)
+```
+
+
+![png](analysis_notebook_files/analysis_notebook_57_0.png)
+
+
+    Saving to ./results/diffsel/line_and_logo_plot.pdf
+
+
+## Set up to enable interactive PDB plotting
+So to do this, we need to add columns called `pdb_chain` and `pdb_site` giving the chain and site number for each residue in the PDB.
+
+We will use the PDB [1rvx](https://www.rcsb.org/structure/1RVX), and we've created the file [./data/H3_site_to_PDB_1rvx.csv](data/H3_site_to_PDB_1rvx.csv) which maps the H3 site numbering to this PDB.
+We then very clearly label what all of the different site numbering schemes mean:
+  - we have sequential 0, 1, 2, ... numbering
+  - we have H3 numbering
+  - we have 1RVX PDB site and chain numbering:
+
+
+```python
+sel_df_pdb_numbers = (
+ sel_df
+ .merge(pandas.read_csv('data/H3_site_to_PDB_1rvx.csv'), how='left')
+ .rename(columns={'site': 'H3_site',
+                  'pdb_chain': 'PDB_1rvx_chain',
+                  'pdb_site': 'PDB_1rvx_site',
+                  'site_label': 'H3_site_label'})
+ .assign(PDB_1rvx_site_label=lambda x: x['PDB_1rvx_site'] +
+                                       x['PDB_1rvx_chain'].apply(lambda c: '' if c == 'A' else '(HA2)'))
+ )
+
+display(HTML(sel_df_pdb_numbers.head().to_html(index=False)))
+
+tidy_sel_file = os.path.join(diffseldir, 'tidy_diffsel.csv')
+print(f"Writing this data frame to {tidy_sel_file}")
+sel_df_pdb_numbers.to_csv(tidy_sel_file, index=False)
+```
+
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>antibody</th>
+      <th>isite</th>
+      <th>H3_site</th>
+      <th>positive_diffsel</th>
+      <th>wildtype</th>
+      <th>mutation</th>
+      <th>mutdiffsel</th>
+      <th>sig</th>
+      <th>H3_site_label</th>
+      <th>PDB_1rvx_chain</th>
+      <th>PDB_1rvx_site</th>
+      <th>PDB_1rvx_site_label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>R</td>
+      <td>7.837088</td>
+      <td>True</td>
+      <td>T(HA2)49</td>
+      <td>B</td>
+      <td>549</td>
+      <td>549(HA2)</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>L</td>
+      <td>5.609973</td>
+      <td>True</td>
+      <td>T(HA2)49</td>
+      <td>B</td>
+      <td>549</td>
+      <td>549(HA2)</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>H</td>
+      <td>5.083673</td>
+      <td>True</td>
+      <td>T(HA2)49</td>
+      <td>B</td>
+      <td>549</td>
+      <td>549(HA2)</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>Y</td>
+      <td>4.185196</td>
+      <td>True</td>
+      <td>T(HA2)49</td>
+      <td>B</td>
+      <td>549</td>
+      <td>549(HA2)</td>
+    </tr>
+    <tr>
+      <td>2B06</td>
+      <td>391</td>
+      <td>(HA2)49</td>
+      <td>28.030697</td>
+      <td>T</td>
+      <td>K</td>
+      <td>2.143734</td>
+      <td>True</td>
+      <td>T(HA2)49</td>
+      <td>B</td>
+      <td>549</td>
+      <td>549(HA2)</td>
+    </tr>
+  </tbody>
+</table>
+
+
+    Writing this data frame to ./results/diffsel/tidy_diffsel.csv
+
 
 
 ```python
