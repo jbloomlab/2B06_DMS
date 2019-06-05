@@ -30,7 +30,7 @@ Input data are in the [./data/](data) subdirectory.
 
 - [./data/H1toH3renumber.csv](./data/H1toH3_renumber.csv) is a CSV file that mapes the numbering from the sequential numbering of the WSN HA protein to the commonly used H3 nubering scheme. The sequential numbering is in the *original* column, and the H3 number is in the *new* column.
 
-- [./data/H1_site_to_PDB_1rvx.csv](./data/H1_site_to_PDB_1rvx.csv) is a file that maps the sites in WSN HA H3 numbering to the equivalent sites in the PR8 HA PDB structure 1RVX. This file has columns site, which is the WSN HA site, pdb_chain, which is the chain in the PDB file, and pdb_site, which is the corresponding site in the PDB structure.
+- [./data/H3_site_to_PDB_1rvx.csv](./data/H3_site_to_PDB_1rvx.csv) is a file that maps the sites in WSN HA H3 numbering to the equivalent sites in the PR8 HA PDB structure [1rvx](https://www.rcsb.org/structure/1RVX). This file has columns site, which is the H3 site, the PDB chain, which is the chain in PDB file [1rvx](https://www.rcsb.org/structure/1RVX), and the PDB site, which is the site in the PDB.
 
 - [./data/neut_data/2B06_neut_analysis.xlsx](./data/neut_data/2B06_neut_analysis.xlsx) is a file containing the raw data from the GFP based neutralization assay measuring the neutralization potency of 2B06 against wildtype WSN GFP virus.
 
