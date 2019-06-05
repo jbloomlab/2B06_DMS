@@ -11,6 +11,8 @@ Selection of virus libraries with 2B06 was performed by Lauren Gentles as was su
 ## Results
 The easiest way to look at the results is to view the Markdown rendering the Jupyter notebook at [results/analysis_notebook.md](results/analysis_notebook.md).
 
+In addition, the results can be visualized on the structure by opening [map_on_struct.ipynb](map_on_struct.ipynb) on [mybinder](https://mybinder.org/) by entering this link: https://mybinder.org/v2/gh/jbloomlab/2B06_DMS/master?urlpath=%2Fapps%2Fmap_on_struct.ipynb
+
 ## Running the analysis
 The analysis is contained in the Python Jupyter notebook [analysis_notebook.ipynb](analysis_notebook.ipynb).
 To run the notebook and generate the Markdown summary at [results/analysis_notebook.md](results/analysis_notebook.md), use the bash script [run_nbs.bash](run_nbs.bash) by running:
