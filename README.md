@@ -29,3 +29,9 @@ Input data are in the [./data/](data) subdirectory.
 - [./data/samplelist.csv](./data/samplelist.csv) provides the R1 location as well as relavent information about each sample.
 
 - [./data/H1toH3renumber.csv](./data/H1toH3_renumber.csv) is a CSV file that mapes the numbering from the sequential numbering of the WSN HA protein to the commonly used H3 nubering scheme. The sequential numbering is in the *original* column, and the H3 number is in the *new* column.
+
+- [./data/H1_site_to_PDB_1rvx.csv](./data/H1_site_to_PDB_1rvx.csv) is a file that maps the sites in WSN HA H3 numbering to the equivalent sites in the PR8 HA PDB structure 1RVX. This file has columns site, which is the WSN HA site, pdb_chain, which is the chain in the PDB file, and pdb_site, which is the corresponding site in the PDB structure.
+
+- [./data/neut_data/2B06_neut_analysis.xlsx](./data/neut_data/2B06_neut_analysis.xlsx) is a file containing the raw data from the GFP based neutralization assay measuring the neutralization potency of 2B06 against wildtype WSN GFP virus.
+
+- [./data/neut_data/2B06_neut_022019.yaml](./data/neut_data/2B06_neut_022019.yaml) is a file that provides the location of the neutralization data file and the name of the samples to [neut_analysis.ipynb](neut_analysis.ipynb) which generates the neutralization curves from this data.
