@@ -4,4 +4,9 @@
 
 results/*
 !results/analysis_notebook*
+!results/diffsel/
+results/diffsel/*
+!results/diffsel/line_and_logo_plot.pdf
+!results/diffsel/tidy_diffsel.csv
+!results/diffsel/2B06_diffsel.pdf
 structure_images
