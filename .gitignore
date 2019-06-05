@@ -4,3 +4,4 @@
 
 results/*
 !results/analysis_notebook*
+structure_images
